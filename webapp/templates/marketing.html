@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% block title %}Marketing Campaign Form{% endblock %}
+{% block content %}
+<p>
+    This tool provides customer insights from our phone-based marketing campaigns. A positive outcome indicates the client is likely to subscribe to a bank term deposit.
+</p>
+<hr class="my-4"/>
+
+{% if result is defined %}
+{% if result %}
+
+<div class="alert alert-success" role="alert">
+    Applicant is likely to agree to a bank term deposit
+</div>
+{% else %}
+<div class="alert alert-warning" role="alert">
+    Applicant is likely to not agree to a bank term deposit
+</div>
+{% endif %}
+{% endif %}
+
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.age.label }}
+        {{ form.age(class="form-control", placeholder="32") }}
+        {% for error in form.age.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{ form.job.label }}
+        {{ form.job(class="form-select mb-3") }}
+        {% for error in form.job.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{ form.marital.label }}
+        {{ form.marital(class="form-select mb-3") }}
+        {% for error in form.marital.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{ form.education.label }}
+        {{ form.education(class="form-select mb-3") }}
+        {% for error in form.education.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-check form-switch">
+        {{ form.default(class="form-check-input", id="defaultSwitch") }}
+        <label class="form-check-label" for="defaultSwitch">{{ form.default.label }}</label>
+        {% for error in form.default.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{ form.balance.label }}
+        {{ form.balance(class="form-control", placeholder="0") }}
+        {% for error in form.balance.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In EUR</small>
+    </div>
+
+    <div class="form-check form-switch">
+        {{ form.housing(class="form-check-input", id="housingSwitch") }}
+        <label class="form-check-label" for="housingSwitch">{{ form.housing.label }}</label>
+        {% for error in form.housing.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-check form-switch">
+        {{ form.loan(class="form-check-input", id="loanSwitch") }}
+        <label class="form-check-label" for="loanSwitch">{{ form.loan.label }}</label>
+        {% for error in form.loan.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{ form.contact.label }}
+        {{ form.contact(class="form-select mb-3") }}
+        {% for error in form.contact.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{ form.day.label }}
+        {{ form.day(class="form-control", placeholder="20") }}
+        {% for error in form.day.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{ form.month.label }}
+        {{ form.month(class="form-select mb-3") }}
+        {% for error in form.month.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{ form.campaign.label }}
+        {{ form.campaign(class="form-control", placeholder="1") }}
+        {% for error in form.campaign.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{ form.pdays.label }}
+        {{ form.pdays(class="form-control", placeholder="-1") }}
+        {% for error in form.pdays.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">Use -1 when client was not previously contacted</small>
+    </div>
+
+    <div class="form-group">
+        {{ form.previous.label }}
+        {{ form.previous(class="form-control", placeholder="Enter pre-campaign contacts", placeholder="0") }}
+        {% for error in form.previous.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{ form.poutcome.label }}
+        {{ form.poutcome(class="form-select mb-3") }}
+        {% for error in form.poutcome.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    {{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}

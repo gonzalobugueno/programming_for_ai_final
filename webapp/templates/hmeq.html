@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block title %}Home Equity Loan Prediction{% endblock %}
+{% block content %}
+<p>
+    A home equity loan is a loan where the obligor uses the equity of his or her home as the underlying collateral.
+    Given all the data, this tool allows predicting if the applicant will default on the loan, be seriously delinquent,
+    or
+    if the applicant paid the loan.
+</p>
+<hr class="my-4"/>
+
+{% if result is defined %}
+{% if result %}
+
+<div class="alert alert-success" role="alert">
+    Applicant is likely to pay the loan
+</div>
+{% else %}
+<div class="alert alert-warning" role="alert">
+    Applicant is likely to default on loan or seriously delinquent on loan
+</div>
+{% endif %}
+{% endif %}
+
+
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.loan.label }}
+        {{ form.loan(class="form-control", placeholder="12900") }}
+        {% for error in form.loan.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In US$</small>
+    </div>
+    <div class="form-group">
+        {{ form.mortdue.label }}
+        {{ form.mortdue(class="form-control", placeholder="22832") }}
+        {% for error in form.mortdue.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In US$. Can be zero.</small>
+    </div>
+    <div class="form-group">
+        {{ form.value.label }}
+        {{ form.value(class="form-control", placeholder="44195") }}
+        {% for error in form.value.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In US$</small>
+    </div>
+    <div class="form-group">
+        {{ form.reason.label }}
+        {{ form.reason(class="form-select mb-3") }}
+        {% for error in form.reason.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.job.label }}
+        {{ form.job(class="form-select mb-3") }}
+        {% for error in form.job.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.yoj.label }}
+        {{ form.yoj(class="form-control", placeholder="0") }}
+        {% for error in form.yoj.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.derog.label }}
+        {{ form.derog(class="form-control", placeholder="0") }}
+        {% for error in form.derog.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.delinq.label }}
+        {{ form.delinq(class="form-control", placeholder="9") }}
+        {% for error in form.delinq.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.clage.label }}
+        {{ form.clage(class="form-control", placeholder="102.5") }}
+        {% for error in form.clage.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In months</small>
+    </div>
+    <div class="form-group">
+        {{ form.ninq.label }}
+        {{ form.ninq(class="form-control", placeholder="0") }}
+        {% for error in form.ninq.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.clno.label }}
+        {{ form.clno(class="form-control", placeholder="16") }}
+        {% for error in form.clno.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.debtinc.label }}
+        {{ form.debtinc(class="form-control", placeholder="0") }}
+        {% for error in form.debtinc.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    {{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}
