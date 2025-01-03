@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% block title %}Credit Default Prediction{% endblock %}
+{% block content %}
+<p>
+    This tool predicts the likelihood of credit default based on past financial and personal information.
+</p>
+<hr class="my-4"/>
+
+{% if result is defined %}
+{% if result %}
+<div class="alert alert-success" role="alert">
+    Applicant is unlikely default.
+</div>
+{% else %}
+<div class="alert alert-warning" role="alert">
+    Applicant is likely to default.
+</div>
+{% endif %}
+{% endif %}
+
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.limit_bal.label }}
+        {{ form.limit_bal(class="form-control", placeholder="140000") }}
+        {% for error in form.limit_bal.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.sex.label }}
+        {{ form.sex(class="form-control") }}
+        {% for error in form.sex.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.education.label }}
+        {{ form.education(class="form-control", placeholder="1 to 4") }}
+        {% for error in form.education.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.marriage.label }}
+        {{ form.marriage(class="form-control", placeholder="1 to 3") }}
+        {% for error in form.marriage.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.age.label }}
+        {{ form.age(class="form-control", placeholder="30") }}
+        {% for error in form.age.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.pay_0.label }}
+        {{ form.pay_0(class="form-control", placeholder="Repayment status for September") }}
+        {% for error in form.pay_0.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.pay_2.label }}
+        {{ form.pay_2(class="form-control", placeholder="Repayment status for August") }}
+        {% for error in form.pay_2.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.pay_3.label }}
+        {{ form.pay_3(class="form-control", placeholder="Repayment status for July") }}
+        {% for error in form.pay_3.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.pay_4.label }}
+        {{ form.pay_4(class="form-control", placeholder="Repayment status for June") }}
+        {% for error in form.pay_4.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.pay_5.label }}
+        {{ form.pay_5(class="form-control", placeholder="Repayment status for May") }}
+        {% for error in form.pay_5.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.pay_6.label }}
+        {{ form.pay_6(class="form-control", placeholder="Repayment status for April") }}
+        {% for error in form.pay_6.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.bill_amt1.label }}
+        {{ form.bill_amt1(class="form-control", placeholder="Bill amount for September") }}
+        {% for error in form.bill_amt1.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In TWD</small>
+    </div>
+    <div class="form-group">
+        {{ form.bill_amt2.label }}
+        {{ form.bill_amt2(class="form-control", placeholder="Bill amount for August") }}
+        {% for error in form.bill_amt2.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In TWD</small>
+    </div>
+    <div class="form-group">
+        {{ form.bill_amt3.label }}
+        {{ form.bill_amt3(class="form-control", placeholder="Bill amount for July") }}
+        {% for error in form.bill_amt3.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In TWD</small>
+    </div>
+    <div class="form-group">
+        {{ form.bill_amt4.label }}
+        {{ form.bill_amt4(class="form-control", placeholder="Bill amount for June") }}
+        {% for error in form.bill_amt4.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In TWD</small>
+    </div>
+    <div class="form-group">
+        {{ form.bill_amt5.label }}
+        {{ form.bill_amt5(class="form-control", placeholder="Bill amount for May") }}
+        {% for error in form.bill_amt5.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In TWD</small>
+    </div>
+    <div class="form-group">
+        {{ form.bill_amt6.label }}
+        {{ form.bill_amt6(class="form-control", placeholder="Bill amount for April") }}
+        {% for error in form.bill_amt6.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In TWD</small>
+    </div>
+    <div class="form-group">
+        {{ form.pay_amt1.label }}
+        {{ form.pay_amt1(class="form-control", placeholder="Payment amount for September") }}
+        {% for error in form.pay_amt1.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In TWD</small>
+    </div>
+    <div class="form-group">
+        {{ form.pay_amt2.label }}
+        {{ form.pay_amt2(class="form-control", placeholder="Payment amount for August") }}
+        {% for error in form.pay_amt2.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In TWD</small>
+    </div>
+    <div class="form-group">
+        {{ form.pay_amt3.label }}
+        {{ form.pay_amt3(class="form-control", placeholder="Payment amount for July") }}
+        {% for error in form.pay_amt3.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In TWD</small>
+    </div>
+    <div class="form-group">
+        {{ form.pay_amt4.label }}
+        {{ form.pay_amt4(class="form-control", placeholder="Payment amount for June") }}
+        {% for error in form.pay_amt4.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In TWD</small>
+    </div>
+    <div class="form-group">
+        {{ form.pay_amt5.label }}
+        {{ form.pay_amt5(class="form-control", placeholder="Payment amount for May") }}
+        {% for error in form.pay_amt5.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In TWD</small>
+    </div>
+    <div class="form-group">
+        {{ form.pay_amt6.label }}
+        {{ form.pay_amt6(class="form-control", placeholder="Payment amount for April") }}
+        {% for error in form.pay_amt6.errors %}
+        <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+        <small class="form-text text-muted">In TWD</small>
+    </div>
+    {{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}

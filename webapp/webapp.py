@@ -6,6 +6,7 @@ from sklearn.preprocessing import LabelEncoder
 import logging
 
 from forms.marketing import MarketingForm
+from forms.defaultform import DefaultForm
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -42,6 +43,9 @@ with open('../training/marketing/pickled/education_encoder.pkl', 'rb') as file:
 with open('../training/marketing/pickled/classifier.pkl', 'rb') as file:
     classifier_marketing: RandomForestClassifier = pickle.load(file)
 
+
+with open('../training/default/pickled/classifier.pkl', 'rb') as file:
+    classifier_default: RandomForestClassifier = pickle.load(file)
 
 @app.route('/')
 def index():
@@ -98,3 +102,38 @@ def marketing():
     ]])
 
     return render_template('marketing.html', form=form, result=pred[0])
+
+
+@app.route('/default', methods=['GET', 'POST'])
+def default():
+    form = DefaultForm()
+    if request.method == 'GET' or not form.validate_on_submit():
+        return render_template('default.html', form=form)
+
+    pred = classifier_default.predict([[
+        form.limit_bal.data,
+        form.sex.data,
+        form.education.data,
+        form.marriage.data,
+        form.age.data,
+        form.pay_0.data,
+        form.pay_2.data,
+        form.pay_3.data,
+        form.pay_4.data,
+        form.pay_5.data,
+        form.pay_6.data,
+        form.bill_amt1.data,
+        form.bill_amt2.data,
+        form.bill_amt3.data,
+        form.bill_amt4.data,
+        form.bill_amt5.data,
+        form.bill_amt6.data,
+        form.pay_amt1.data,
+        form.pay_amt2.data,
+        form.pay_amt3.data,
+        form.pay_amt4.data,
+        form.pay_amt5.data,
+        form.pay_amt6.data
+    ]])
+
+    return render_template('default.html', form=form, result=pred[0])
